@@ -45,6 +45,9 @@ Contributions are welcome! If you would like to contribute to this project, plea
 ## License
 This project is licensed under the MIT License.
 
+```bash
+------------------------------------------------------------------------------------------------------------------
+ ```
 
 # 06 Server-Side APIs: Weather Dashboard
 

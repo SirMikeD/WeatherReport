@@ -20,11 +20,19 @@ searchForm.addEventListener('submit', function(event) {
 
 function reverseGeocode(city) {
     console.log('Reverse geocoding for city:', city);
-    fetch(`${geoBaseUrl}?q=${city}&limit=1&appid=${apiKey}`)
-        .then(response => response.json())
+    fetch(`${geoBaseUrl}?q=${encodeURIComponent(city)}&limit=1&appid=${apiKey}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(data => {
-            console.log('Reverse geocoding response:', data);
+            if (!data || data.length === 0 || !data[0].lat || !data[0].lon) {
+                throw new Error('Invalid data returned from API');
+            }
             const { lat, lon } = data[0];
+            console.log('Reverse geocoding response:', data);
             console.log('Latitude:', lat, 'Longitude:', lon);
             getWeatherData(lat, lon, city);
         })
