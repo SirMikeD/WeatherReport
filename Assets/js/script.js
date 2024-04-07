@@ -28,5 +28,27 @@ function getWeatherForecast(city) {
 }
 
 function displayForecast(data) {
-    // Implement logic to display forecast data in your HTML
+    // Clear previous forecast data
+    forecast.innerHTML = '';
+
+    // Loop through forecast data and display each day's forecast
+    data.list.forEach(item => {
+        const forecastItem = document.createElement('div');
+        forecastItem.classList.add('forecast-item');
+
+        const date = new Date(item.dt * 1000);
+        const dateString = date.toLocaleDateString();
+        const timeString = date.toLocaleTimeString();
+
+        const temperature = item.main.temp;
+        const description = item.weather[0].description;
+
+        forecastItem.innerHTML = `
+            <h3>${dateString} - ${timeString}</h3>
+            <p>Temperature: ${temperature}°C</p>
+            <p>Description: ${description}</p>
+        `;
+
+        forecast.appendChild(forecastItem);
+    });
 }
