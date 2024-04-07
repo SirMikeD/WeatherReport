@@ -35,6 +35,7 @@ function reverseGeocode(city) {
             console.log('Reverse geocoding response:', data);
             console.log('Latitude:', lat, 'Longitude:', lon);
             getWeatherData(lat, lon, city);
+            getWeatherForecast(lat, lon); // Call the forecast function here
         })
         .catch(error => console.error('Error fetching reverse geocoding data:', error.message));
 }
@@ -51,6 +52,17 @@ function getWeatherData(latitude, longitude, city) {
         .catch(error => console.error('Error fetching current weather:', error));
 }
 
+function getWeatherForecast(latitude, longitude) {
+    console.log('Fetching weather forecast data');
+    fetch(`${weatherBaseUrl}/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`)
+        .then(response => response.json())
+        .then(data => {
+            console.log('Weather forecast data:', data);
+            displayForecast(data);
+        })
+        .catch(error => console.error('Error fetching weather forecast:', error));
+}
+
 function displayCurrentWeather(data, city) {
     currentWeather.innerHTML = `
         <h2>${city}</h2>
@@ -59,6 +71,10 @@ function displayCurrentWeather(data, city) {
         <p>Humidity: ${data.main.humidity}%</p>
         <p>Wind Speed: ${data.wind.speed} m/s</p>
     `;
+}
+
+function displayForecast(data) {
+    // Implement logic to display forecast data in your HTML
 }
 
 function saveToLocalStorage(city) {
