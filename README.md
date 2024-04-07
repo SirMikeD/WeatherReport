@@ -10,7 +10,7 @@ Mike's weather board application provides current and future weather conditions 
 * License
 
 ## About
-The Weather Dashboard is a web application built to display current weather conditions and a 5-day forecast for cities worldwide. It leverages the OpenWeatherMap API to retrieve weather data and dynamically updates the HTML and CSS to present the information in an intuitive interface.
+Mike's Weather Board is a web application built to display current weather conditions and a 5-day forecast for cities worldwide. It leverages the OpenWeatherMap API to retrieve weather data and dynamically updates the HTML and CSS to present the information in an intuitive interface.
 
 ## Features
 Displays current weather conditions including temperature, humidity, and wind speed.
