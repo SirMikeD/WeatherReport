@@ -23,7 +23,7 @@ function reverseGeocode(city) {
     fetch(`${geoBaseUrl}?q=${encodeURIComponent(city)}&limit=1&appid=${apiKey}`)
         .then(response => {
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                throw new Error(`Network response was not ok (${response.status} ${response.statusText})`);
             }
             return response.json();
         })
@@ -36,7 +36,7 @@ function reverseGeocode(city) {
             console.log('Latitude:', lat, 'Longitude:', lon);
             getWeatherData(lat, lon, city);
         })
-        .catch(error => console.error('Error fetching reverse geocoding data:', error));
+        .catch(error => console.error('Error fetching reverse geocoding data:', error.message));
 }
 
 function getWeatherData(latitude, longitude, city) {
