@@ -1,3 +1,51 @@
+# Mike's Weather Board
+Mike's weather board application provides current and future weather conditions for cities, utilizing the OpenWeatherMap API.
+
+## Table of Contents
+* About
+* Features
+* Installation
+* Usage
+* Contributing
+* License
+
+## About
+The Weather Dashboard is a web application built to display current weather conditions and a 5-day forecast for cities worldwide. It leverages the OpenWeatherMap API to retrieve weather data and dynamically updates the HTML and CSS to present the information in an intuitive interface.
+
+## Features
+Displays current weather conditions including temperature, humidity, and wind speed.
+Provides a 5-day forecast with date, weather conditions, temperature, humidity, and wind speed.
+Allows users to search for cities to view weather information.
+Stores search history using localStorage for easy access to previously searched cities.
+
+## Installation
+
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/your-username/weather-dashboard.git
+    ```
+
+2. Navigate to the project directory:
+
+    ```bash
+    cd weather-dashboard
+    ```
+
+3. Open the `index.html` file in your preferred web browser.
+
+## Usage
+Enter the name of a city in the search input field.
+Click the "Search" button or press Enter to retrieve weather information for the specified city.
+View the current weather conditions and the 5-day forecast displayed on the dashboard.
+Click on a city in the search history to view weather information for that city again.
+Contributing
+Contributions are welcome! If you would like to contribute to this project, please fork the repository and submit a pull request with your changes.
+
+## License
+This project is licensed under the MIT License.
+
+
 # 06 Server-Side APIs: Weather Dashboard
 
 ## Your Task
