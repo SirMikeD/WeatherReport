@@ -46,10 +46,15 @@ button:hover {
     margin-top: 20px;
 }
 
+.city-title {
+    text-align: center;
+}
+
 .city-list {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
+    
 }
 
 .city-item {
