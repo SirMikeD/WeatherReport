@@ -4,6 +4,16 @@ const weatherBaseUrl = 'https://api.openweathermap.org/data/2.5';
 const searchForm = document.getElementById('search-form');
 const cityInput = document.getElementById('city-input');
 const forecast = document.getElementById('forecast');
+const cityListContainer = document.querySelector('.city-list');
+const cities = ['Toronto', 'Montreal', 'Vancouver', 'Calgary', 'Edmonton', 'Ottawa', 'Winnipeg', 'Quebec City', 'Hamilton', 'Kitchener'];
+
+cities.forEach(city => {
+    const cityItem = document.createElement('div');
+    cityItem.classList.add('city-item');
+    cityItem.textContent = city;
+    cityItem.addEventListener('click', () => getWeatherForecast(city)); // Add click event listener to fetch forecast
+    cityListContainer.appendChild(cityItem);
+});
 
 searchForm.addEventListener('submit', function(event) {
     event.preventDefault();
@@ -31,24 +41,49 @@ function displayForecast(data) {
     // Clear previous forecast data
     forecast.innerHTML = '';
 
-    // Loop through forecast data and display each day's forecast
-    data.list.forEach(item => {
-        const forecastItem = document.createElement('div');
-        forecastItem.classList.add('forecast-item');
+    // Group forecast data by day
+    const forecastByDay = groupForecastByDay(data.list);
 
-        const date = new Date(item.dt * 1000);
-        const dateString = date.toLocaleDateString();
-        const timeString = date.toLocaleTimeString();
+    // Loop through each day's forecast
+    for (const [date, forecastItems] of Object.entries(forecastByDay)) {
+        const forecastCard = document.createElement('div');
+        forecastCard.classList.add('forecast-card');
 
-        const temperature = item.main.temp;
-        const description = item.weather[0].description;
+        // Create a header for the day
+        const dayHeader = document.createElement('h2');
+        dayHeader.textContent = new Date(date).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+        forecastCard.appendChild(dayHeader);
 
-        forecastItem.innerHTML = `
-            <h3>${dateString} - ${timeString}</h3>
-            <p>Temperature: ${temperature}°C</p>
-            <p>Description: ${description}</p>
-        `;
+        // Loop through forecast items for the day and display them
+        forecastItems.forEach(item => {
+            const forecastItem = document.createElement('div');
+            forecastItem.classList.add('forecast-item');
 
-        forecast.appendChild(forecastItem);
+            const timeString = new Date(item.dt * 1000).toLocaleTimeString();
+            const temperature = item.main.temp;
+            const description = item.weather[0].description;
+
+            forecastItem.innerHTML = `
+                <h3>${timeString}</h3>
+                <p>Temperature: ${temperature}°C</p>
+                <p>Description: ${description}</p>
+            `;
+
+            forecastCard.appendChild(forecastItem);
+        });
+
+        forecast.appendChild(forecastCard);
+    }
+}
+
+function groupForecastByDay(forecastList) {
+    const forecastByDay = {};
+    forecastList.forEach(item => {
+        const date = new Date(item.dt * 1000).toLocaleDateString('en-US');
+        if (!forecastByDay[date]) {
+            forecastByDay[date] = [];
+        }
+        forecastByDay[date].push(item);
     });
+    return forecastByDay;
 }
