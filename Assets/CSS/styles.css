@@ -92,6 +92,7 @@ button:hover {
     list-style-type: none; /* Remove the bullets */
     display: flex; /* Display the list items in a row */
     flex-wrap: wrap; /* Allow wrapping to next row */
+    justify-content: center; /* Center the list horizontally */
 }
 
 .search-history li {
