@@ -24,7 +24,7 @@ searchForm.addEventListener('submit', function(event) {
 });
 
 function getWeatherForecast(city) {
-    fetch(`${weatherBaseUrl}/forecast?q=${encodeURIComponent(city)}&appid=${apiKey}`)
+    fetch(`${weatherBaseUrl}/forecast?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Network response was not ok (${response.status} ${response.statusText})`);
