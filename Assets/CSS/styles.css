@@ -8,6 +8,13 @@ body {
     align-items: center;
 }
 
+.container h1 {
+    background: linear-gradient(to right, darkgreen, black); /* Apply gradient background from dark green to black */
+    color: white; /* Set text color to white for better contrast */
+    padding: 20px; /* Add padding for better spacing */
+    text-align: center; /* Center align the text */
+}
+
 .forecast {
     display: flex;
     flex-wrap: nowrap; /* Prevents wrapping to new lines */
