@@ -50,7 +50,8 @@ function getWeatherForecast(city) {
             return response.json();
         })
         .then(data => {
-            displayForecast(data);
+            displayCurrentWeather(data.list[0]); // Display current weather
+            displayForecast(data); // Display forecast for next five days
         })
         .catch(error => console.error('Error fetching weather forecast:', error.message));
 }
@@ -62,8 +63,9 @@ function displayForecast(data) {
     // Group forecast data by day
     const forecastByDay = groupForecastByDay(data.list);
 
-    // Get the next 5 days from the forecast data
-    const nextFiveDays = Object.entries(forecastByDay).slice(0, 5);
+    // Get the next 5 days from the forecast data, starting from index 1 to exclude the current day
+const nextFiveDays = Object.entries(forecastByDay).slice(1, 6);
+
 
     // Loop through each day's forecast
     for (const [date, forecastItems] of nextFiveDays) {
@@ -104,6 +106,53 @@ function displayForecast(data) {
     }
 }
 
+function displayCurrentWeather(currentWeather) {
+    const currentWeatherContainer = document.getElementById('current-weather');
+    currentWeatherContainer.innerHTML = ''; // Clear previous weather data
+
+    // Create elements to display current weather information
+    const temperature = document.createElement('p');
+    temperature.textContent = `Temperature: ${currentWeather.main.temp}°C`;
+
+    const description = document.createElement('p');
+    description.textContent = `Description: ${currentWeather.weather[0].description}`;
+
+    const weatherIcon = document.createElement('img');
+    weatherIcon.classList.add('weather-icon');
+    const iconUrl = `http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}.png`;
+    weatherIcon.src = iconUrl;
+
+    // Append elements to the container
+    currentWeatherContainer.appendChild(temperature);
+    currentWeatherContainer.appendChild(description);
+    currentWeatherContainer.appendChild(weatherIcon);
+}
+
+
+function displayNextFiveDaysForecast(forecastData) {
+    const nextFiveDaysContainer = document.getElementById('next-five-days');
+    nextFiveDaysContainer.innerHTML = ''; // Clear previous forecast data
+    
+    // Loop through the next 5 days' forecast data
+    for (let i = 1; i <= 5; i++) {
+        const forecastCard = document.createElement('div');
+        forecastCard.classList.add('forecast-card');
+
+        // Assuming forecastData is an array containing forecast data for each day
+        const dayForecast = forecastData[i];
+
+        // Create a header for the day
+        const dayHeader = document.createElement('h2');
+        dayHeader.textContent = dayForecast.date; // Assuming each forecast object has a date property
+        forecastCard.appendChild(dayHeader);
+
+        // Add other forecast details as needed, similar to how you did for the current weather
+
+        // Append the forecast card to the container
+        nextFiveDaysContainer.appendChild(forecastCard);
+    }
+}
+
 function groupForecastByDay(forecastList) {
     const forecastByDay = {};
     forecastList.forEach(item => {
@@ -128,3 +177,4 @@ function updateSearchHistoryList(history) {
         searchHistoryList.appendChild(listItem);
     });
 }
+ 

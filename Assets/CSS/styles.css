@@ -9,27 +9,53 @@ body {
 }
 
 .container h1 {
-    background: linear-gradient(to right, darkgreen, black); /* Apply gradient background from dark green to black */
-    color: white; /* Set text color to white for better contrast */
-    padding: 20px; /* Add padding for better spacing */
-    text-align: center; /* Center align the text */
+    background: linear-gradient(to right, darkgreen, black);
+    color: white;
+    padding: 20px;
+    text-align: center;
 }
 
 .forecast {
     display: flex;
-    flex-wrap: nowrap; /* Prevents wrapping to new lines */
-    overflow-x: auto; /* Allows horizontal scrolling */
-    padding: 10px; /* Adjust as needed */
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 10px;
+    justify-content: center; /* Center the forecast cards horizontally */
 }
 
 .forecast-card {
-    flex: 0 0 auto; /* Prevents stretching of items */
-    margin-right: 10px; /* Adjust as needed */
+    flex: 0 0 auto;
+    margin-right: 10px;
     border: solid 1px black;
+    padding: 20px;
 }
 
 .forecast-item {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+#current-weather {
+    border: 1px solid black; /* Add a border around the current weather cards */
+    padding: 10px; /* Add padding for better spacing */
+}
+
+#next-five-days {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 10px;
+    justify-content: flex-start; /* Align the forecast cards to the left */
+}
+
+#next-five-days .forecast-card {
+    flex: 0 0 auto;
+    margin-right: 10px;
+    border: solid 1px black;
+    padding: 20px;
+}
+
+#next-five-days .forecast-item {
+    margin-bottom: 20px;
 }
 
 input[type="text"] {
@@ -61,7 +87,6 @@ button:hover {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
-    
 }
 
 .city-item {
@@ -72,40 +97,32 @@ button:hover {
     cursor: pointer;
 }
 
-#current-weather {
-    margin-top: 20px;
-}
-
-#forecast {
-    margin-top: 20px;
-}
-
-.forecast-card {
-    flex: 0 0 auto; /* Prevents stretching of items */
-    margin-right: 20px; /* Adjust margin as needed */
-    padding: 20px; /* Adjust padding as needed */
-    border: solid 1px black;
-}
-
-.forecast-item {
-    margin-bottom: 20px; /* Adjust margin as needed */
-}
-
 .search-history {
     margin-top: 20px;
 }
 
 .search-history ul {
-    list-style-type: none; /* Remove the bullets */
-    display: flex; /* Display the list items in a row */
-    flex-wrap: wrap; /* Allow wrapping to next row */
-    justify-content: center; /* Center the list horizontally */
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .search-history li {
-    margin-right: 10px; /* Adjust margin between list items */
-    padding: 5px 10px; /* Adjust padding of list items */
+    margin-right: 10px;
+    padding: 5px 10px;
     background-color: #f0f0f0;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.weather-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#current-weather-container,
+#next-five-days-container {
+    margin-top: 20px;
 }
