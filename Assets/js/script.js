@@ -54,6 +54,13 @@ function displayForecast(data) {
         dayHeader.textContent = new Date(date).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
         forecastCard.appendChild(dayHeader);
 
+        // Create an element for the weather icon
+        const weatherIcon = document.createElement('img');
+        weatherIcon.classList.add('weather-icon');
+        const iconUrl = `http://openweathermap.org/img/wn/${forecastItems[0].weather[0].icon}.png`;
+        weatherIcon.src = iconUrl;
+        forecastCard.appendChild(weatherIcon);
+
         // Loop through forecast items for the day and display them
         forecastItems.forEach(item => {
             const forecastItem = document.createElement('div');
