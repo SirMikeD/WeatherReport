@@ -5,13 +5,21 @@ const searchForm = document.getElementById('search-form');
 const cityInput = document.getElementById('city-input');
 const forecast = document.getElementById('forecast');
 const cityListContainer = document.querySelector('.city-list');
+const searchHistoryList = document.getElementById('search-history-list');
 const cities = ['Toronto', 'Montreal', 'Vancouver', 'Calgary', 'Edmonton', 'Ottawa', 'Winnipeg', 'Quebec City', 'Hamilton', 'Kitchener'];
 
+// Load search history from local storage when the page loads
+window.addEventListener('DOMContentLoaded', () => {
+    const searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+    updateSearchHistoryList(searchHistory);
+});
+
+// Append top 10 cities to the city list container
 cities.forEach(city => {
     const cityItem = document.createElement('div');
     cityItem.classList.add('city-item');
     cityItem.textContent = city;
-    cityItem.addEventListener('click', () => getWeatherForecast(city)); // Add click event listener to fetch forecast
+    cityItem.addEventListener('click', () => getWeatherForecast(city));
     cityListContainer.appendChild(cityItem);
 });
 
@@ -20,8 +28,18 @@ searchForm.addEventListener('submit', function(event) {
     const cityName = cityInput.value.trim();
     if (cityName) {
         getWeatherForecast(cityName);
+        saveToLocalStorage(cityName);
     }
 });
+
+function saveToLocalStorage(city) {
+    let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+    searchHistory.unshift(city);
+    searchHistory = [...new Set(searchHistory)];
+    searchHistory = searchHistory.slice(0, 10);
+    localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+    updateSearchHistoryList(searchHistory);
+}
 
 function getWeatherForecast(city) {
     fetch(`${weatherBaseUrl}/forecast?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric`)
@@ -44,8 +62,11 @@ function displayForecast(data) {
     // Group forecast data by day
     const forecastByDay = groupForecastByDay(data.list);
 
+    // Get the next 5 days from the forecast data
+    const nextFiveDays = Object.entries(forecastByDay).slice(0, 5);
+
     // Loop through each day's forecast
-    for (const [date, forecastItems] of Object.entries(forecastByDay)) {
+    for (const [date, forecastItems] of nextFiveDays) {
         const forecastCard = document.createElement('div');
         forecastCard.classList.add('forecast-card');
 
@@ -93,4 +114,17 @@ function groupForecastByDay(forecastList) {
         forecastByDay[date].push(item);
     });
     return forecastByDay;
+}
+
+function updateSearchHistoryList(history) {
+    // Clear previous search history list
+    searchHistoryList.innerHTML = '';
+    // Add new search history items
+    history.forEach(city => {
+        const listItem = document.createElement('li');
+        listItem.classList.add('city-item');
+        listItem.textContent = city;
+        listItem.addEventListener('click', () => getWeatherForecast(city));
+        searchHistoryList.appendChild(listItem);
+    });
 }

@@ -84,6 +84,20 @@ button:hover {
     margin-bottom: 20px; /* Adjust margin as needed */
 }
 
-#search-history {
+.search-history {
     margin-top: 20px;
+}
+
+.search-history ul {
+    list-style-type: none; /* Remove the bullets */
+    display: flex; /* Display the list items in a row */
+    flex-wrap: wrap; /* Allow wrapping to next row */
+}
+
+.search-history li {
+    margin-right: 10px; /* Adjust margin between list items */
+    padding: 5px 10px; /* Adjust padding of list items */
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    cursor: pointer;
 }
