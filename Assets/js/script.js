@@ -53,6 +53,7 @@ function getWeatherForecast(city) {
         .then(data => {
             displayCurrentWeather(city, data.list[0]); // Display current weather with city name
             displayForecast(data); // Display forecast for next five days
+            displayDate(date);
         })
         .catch(error => console.error('Error fetching weather forecast:', error.message));
 }
@@ -119,9 +120,14 @@ function displayCurrentWeather(city, currentWeather) {
     cityName.textContent = `City: ${city}`;
     currentWeatherContainer.appendChild(cityName); // Add City Name below Current Weather header
 
+    const currentDate = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+    const date = document.createElement('p');
+    date.textContent = `Date: ${currentDate}`;
+    currentWeatherContainer.appendChild(date); // Add Date after City Name
+
     const description = document.createElement('p');
     description.textContent = `Description: ${currentWeather.weather[0].description}`;
-    currentWeatherContainer.appendChild(description); // Add Description after City Name
+    currentWeatherContainer.appendChild(description); // Add Description after Date
 
     const temperature = document.createElement('p');
     temperature.textContent = `Temperature: ${currentWeather.main.temp}°C`;
@@ -131,12 +137,6 @@ function displayCurrentWeather(city, currentWeather) {
     weatherIcon.classList.add('weather-icon');
     const iconUrl = `http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}.png`;
     weatherIcon.src = iconUrl;
-    currentWeatherContainer.appendChild(weatherIcon);
-
-    // Append elements to the container in the corrected order
-    currentWeatherContainer.appendChild(cityName);
-    currentWeatherContainer.appendChild(description);
-    currentWeatherContainer.appendChild(temperature);
     currentWeatherContainer.appendChild(weatherIcon);
 
     // Show the current weather container
