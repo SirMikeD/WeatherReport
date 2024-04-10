@@ -111,24 +111,32 @@ function displayCurrentWeather(city, currentWeather) {
     currentWeatherContainer.innerHTML = ''; // Clear previous weather data
 
     // Create elements to display current weather information
-    const cityName = document.createElement('h2');
-    cityName.textContent = `City: ${city}`;
+    const currentWeatherHeader = document.createElement('h2');
+    currentWeatherHeader.textContent = 'Current Weather';
+    currentWeatherContainer.appendChild(currentWeatherHeader); // Add Current Weather header first
 
-    const temperature = document.createElement('p');
-    temperature.textContent = `Temperature: ${currentWeather.main.temp}°C`;
+    const cityName = document.createElement('h3');
+    cityName.textContent = `City: ${city}`;
+    currentWeatherContainer.appendChild(cityName); // Add City Name below Current Weather header
 
     const description = document.createElement('p');
     description.textContent = `Description: ${currentWeather.weather[0].description}`;
+    currentWeatherContainer.appendChild(description); // Add Description after City Name
+
+    const temperature = document.createElement('p');
+    temperature.textContent = `Temperature: ${currentWeather.main.temp}°C`;
+    currentWeatherContainer.appendChild(temperature); // Add Temperature after Description
 
     const weatherIcon = document.createElement('img');
     weatherIcon.classList.add('weather-icon');
     const iconUrl = `http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}.png`;
     weatherIcon.src = iconUrl;
+    currentWeatherContainer.appendChild(weatherIcon);
 
-    // Append elements to the container
+    // Append elements to the container in the corrected order
     currentWeatherContainer.appendChild(cityName);
-    currentWeatherContainer.appendChild(temperature);
     currentWeatherContainer.appendChild(description);
+    currentWeatherContainer.appendChild(temperature);
     currentWeatherContainer.appendChild(weatherIcon);
 
     // Show the current weather container

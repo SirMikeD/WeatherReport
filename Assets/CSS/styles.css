@@ -41,8 +41,13 @@ body {
 }
 
 #current-weather {
+    display: none; /* Hide the container by default */
     border: 1px solid black; /* Add a border around the current weather cards */
     padding: 10px; /* Add padding for better spacing */
+    background: linear-gradient(to right, darkgreen, black);
+    color: white; /* Text color */
+    border-radius: 8px; /* Optional: Add rounded corners */
+    text-align: center; /* Center the content horizontally */
 }
 
 .forecast-card,
@@ -115,13 +120,15 @@ button:hover {
 
 .search-history {
     margin-top: 20px;
+    text-align: center; /* Center the "Search History" text */
 }
 
 .search-history ul {
     list-style-type: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: flex; /* Change to flex to make the list items appear in a row */
+    flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
+    justify-content: center; /* Center the items horizontally */
+    padding: 0; /* Remove default padding */
 }
 
 .search-history li {
