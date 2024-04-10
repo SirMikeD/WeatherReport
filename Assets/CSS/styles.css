@@ -28,6 +28,12 @@ body {
     margin-right: 10px;
     border: solid 1px black;
     padding: 20px;
+    text-align: center; /* Center the content horizontally */
+}
+
+.forecast-card img.weather-icon {
+    display: block; /* Make the image a block element */
+    margin: auto; /* Center the image horizontally */
 }
 
 .forecast-item {
@@ -37,6 +43,16 @@ body {
 #current-weather {
     border: 1px solid black; /* Add a border around the current weather cards */
     padding: 10px; /* Add padding for better spacing */
+}
+
+.forecast-card,
+.current-weather-container,
+.current-weather {
+    background: linear-gradient(to right, darkgreen, black);
+    color: white; /* Text color */
+    padding: 10px; /* Adjust padding as needed */
+    border-radius: 8px; /* Optional: Add rounded corners */
+    text-align: center; /* Center the content horizontally */
 }
 
 #next-five-days {
